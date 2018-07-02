@@ -10,7 +10,7 @@ def selects_the_titles_of_all_projects_and_their_pledge_amounts_alphabetized_by_
 "select title, sum(amount)
 from projects
 inner join pledges
-on projects.id = project_id
+on projects.id = pledges.project_id
 group by title"
 end
 
@@ -18,7 +18,7 @@ def selects_the_user_name_age_and_pledge_amount_for_all_pledges_alphabetized_by_
 "select name, age, sum(amount)
 from users
 join pledges
-on users.id = user_id
+on users.id = pledges.user_id
 group by name"
 end
 
@@ -26,7 +26,7 @@ def selects_the_titles_and_amount_over_goal_of_all_projects_that_have_met_their_
 "select title, (sum(amount) - funding_goal) as amount_over_goal
 from projects
 inner join pledges
-on projects.id = project_id
+on projects.id = pledges.project_id
 group by title
 having amount_over_goal >= 0"
 end
@@ -34,7 +34,7 @@ end
 def selects_user_names_and_amounts_of_all_pledges_grouped_by_name_then_orders_them_by_the_amount_and_users_name
 "select name, sum(amount) as answer
 from users
-join pledges on users.id = user_id
+join pledges on users.id = pledges.user_id
 group by name
 order by answer asc"
 end
@@ -43,7 +43,7 @@ def selects_the_category_names_and_pledge_amounts_of_all_pledges_in_the_music_ca
 "select category, amount
 from projects
 join pledges
-on projects.id = project_id
+on projects.id = pledges.project_id
 where category = 'music'";
 end
 
@@ -51,6 +51,6 @@ def selects_the_category_name_and_the_sum_total_of_the_all_its_pledges_for_the_b
 "select category, sum(amount)
 from projects
 join pledges
-on projects.id = project_id
+on projects.id = pledges.project_id
 where category = 'books'";
 end
